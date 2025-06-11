@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensagem Interativa com Balões</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #f0f8ff;
+      position: relative;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #mensagem {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #444;
+      display: none;
+    }
+
+    .balao {
+      position: absolute;
+      bottom: -100px;
+      width: 30px;
+      height: 40px;
+      background-color: red;
+      border-radius: 50% 50% 50% 50%;
+      animation: subir 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Clique no botão abaixo</h1>
+  <button onclick="mostrarMensagem()">Clique aqui</button>
+
+  <div id="mensagem">🎉 Enzo você é muitochato aeeee🎈</div>
+
+  <script>
+    function mostrarMensagem() {
+      const mensagem = document.getElementById("mensagem");
+      mensagem.style.display = "block";
+
+      // Criar vários balões
+      for (let i = 0; i < 20; i++) {
+        criarBalao();
+      }
+    }
+
+    function criarBalao() {
+      const balao = document.createElement("div");
+      balao.classList.add("balao");
+
+      // Posicionamento e cor aleatória
+      balao.style.left = Math.random() * 100 + "vw";
+      balao.style.backgroundColor = corAleatoria();
+
+      // Duração aleatória
+      balao.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+      document.body.appendChild(balao);
+
+      // Remover após a animação
+      setTimeout(() => {
+        balao.remove();
+      }, 6000);
+    }
+
+    function corAleatoria() {
+      const cores = ["#FF69B4", "#FF4500", "#FFD700", "#87CEEB", "#98FB98", "#9370DB"];
+      return cores[Math.floor(Math.random() * cores.length)];
+    }
+  </script>
+
+</body>
+</html>
